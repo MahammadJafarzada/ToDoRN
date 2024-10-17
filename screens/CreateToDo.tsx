@@ -1,8 +1,6 @@
-// CreateToDo.tsx
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import React, { useState } from 'react';
 import tw from 'twrnc';
-import AntDesign from '@expo/vector-icons/AntDesign';
 
 const CreateToDo = ({ route, navigation }: { route: any; navigation: any }) => {
   const [title, setTitle] = useState('');
