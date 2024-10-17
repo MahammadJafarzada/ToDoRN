@@ -32,7 +32,6 @@ const CreateToDo = ({ route, navigation }: { route: any; navigation: any }) => {
         style={tw`bg-blue-500 rounded-full p-3 items-center justify-center`}
       >
         <Text style={tw`text-white`}>Add Todo</Text>
-        <AntDesign name="plus" size={20} color="white" />
       </TouchableOpacity>
     </View>
   );

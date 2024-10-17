@@ -1,8 +1,11 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-
+type Todo = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
 export type RootStackParamList = {
-    Main: undefined;
-    EditToDo: undefined;
-    CreateToDo: undefined;
-  };
+  Main: undefined;
+  EditToDo: { todo: Todo; updateTodo: (todo: Todo) => void }; 
+  CreateToDo: { addTodo: (title: string) => void }; 
+};

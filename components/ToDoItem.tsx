@@ -17,30 +17,35 @@ type TodoItemProps = {
   item: Todo;
   onDelete: (id: number) => void;
   onComplete: (id: number) => void;
+  updateTodo: (todo: Todo) => void; 
 };
 
-
-const TodoItem: React.FC<TodoItemProps> = ({ item, onDelete, onComplete }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ item, onDelete, onComplete, updateTodo }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const navigationToEdit = () => {
-    navigation.navigate('EditToDo')
-  }
-  const navigationToCreate = () =>{
-    navigation.navigate('CreateToDo')
-  }
+    navigation.navigate('EditToDo', { todo: item, updateTodo }); 
+  };
+
   return (
     <View style={tw`flex-row items-center py-2`}>
-      <Text style={tw`flex-1`}>{item.title}</Text>
+      <Text 
+        style={[
+          tw`flex-1`, 
+          item.completed && tw`line-through` 
+        ]}
+      >
+        {item.title}
+      </Text>
       <View style={tw`flex-row`}>
         <TouchableOpacity style={tw`px-2`} onPress={navigationToEdit}>
           <Feather name="edit" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity style={tw`px-2`} onPress={() => onComplete(item.id)}>
           {item.completed ? (
-            <Fontisto name="checkbox-passive" size={24} color="black" />
-          ) : (
             <Fontisto name="checkbox-active" size={24} color="black" />
+          ) : (
+            <Fontisto name="checkbox-passive" size={24} color="black" />
           )}
         </TouchableOpacity>
         <TouchableOpacity style={tw`px-2`} onPress={() => onDelete(item.id)}>

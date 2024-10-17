@@ -1,4 +1,3 @@
-// MainScreen.tsx
 import { View, TouchableOpacity, FlatList } from "react-native";
 import React, { useState } from "react";
 import { initialTodos } from "../utils/FakeApi"; 
@@ -34,8 +33,17 @@ const MainScreen: React.FC = () => {
     setTodos([...todos, newTodo]);
   };
 
+  const updateTodo = (updatedTodo: Todo) => {
+    setTodos(todos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo)));
+  };
+
   const renderItem = ({ item }: { item: Todo }) => (
-    <TodoItem item={item} onDelete={deleteItem} onComplete={onCompleted} />
+    <TodoItem 
+      item={item} 
+      onDelete={deleteItem} 
+      onComplete={onCompleted} 
+      updateTodo={  updateTodo} 
+    />
   );
 
   return (
@@ -47,7 +55,7 @@ const MainScreen: React.FC = () => {
       />
       <TouchableOpacity
         style={tw`bg-blue-500 rounded-full p-3 items-center justify-center absolute bottom-10 right-5`}
-        onPress={() => navigation.navigate('CreateToDo', { addTodo })} // Correctly pass addTodo here
+        onPress={() => navigation.navigate('CreateToDo', { addTodo })} 
       >
         <AntDesign name="plus" size={24} color="white" />
       </TouchableOpacity>
